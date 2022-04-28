@@ -1,5 +1,3 @@
-noseX=0 ;
-noseY=0 ;
 
 leftwristX=0 ;
 rightwristX=0 ;
@@ -13,16 +11,25 @@ function preload(){
 
 function setup(){
      video=createCapture(VIDEO);
-     video.size(550, 600);
-canvas=createCanvas(550, 550);
-canvas.position(600, 120);
+     video.size(550, 580);
+canvas=createCanvas(450, 450);
+canvas.position(600, 150);
 poseNet=ml5.poseNet(video, modelLoaded);
 poseNet.on("pose", gotPoses);
 }
 
-function draw(){
 
-}
+    function draw(){
+        background("#79f2e6");
+        fill("#03adfc");
+        textSize(difference);
+        text("Samarth", 100, 200);
+        document.getElementById("font_size").innerHTML="fontSize of the text will be= "+difference+"px";
+        }
+
+
+        
+
 
 function modelLoaded(){
     console.log("poseNet has been initialized!");
@@ -31,9 +38,6 @@ function modelLoaded(){
 function gotPoses(results){
     if(results.length>0){
 console.log(results);
-noseX=results[0].pose.nose.x;
-noseY=results[0].pose.nose.y;
-console.log("noseX= "+noseX+" , noseY= "+noseY);
 leftwristX=results[0].pose.leftWrist.x;
 rightwristX=results[0].pose.rightWrist.x;
 difference=floor(leftwristX-rightwristX);
